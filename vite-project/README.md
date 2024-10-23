@@ -1,5 +1,9 @@
 hello..
 
+
+for cloning..
+git@github.com:utkarshyadav11/Image_editors.git
+
 install node_modules
 #npm install
 
