@@ -76,7 +76,7 @@ const ImageCanvas = ({ selectedImage }) => {
           canvas.add(img);
           canvas.sendToBack(img); // Ensure image stays in the background
           setImageLoaded(true); // Mark the image as loaded
-          canvas.renderAll(); // Re-render the canvas
+          canvas.renderAll();
         },
         { crossOrigin: "anonymous" } // Set crossOrigin for external images
       );
@@ -137,6 +137,26 @@ const ImageCanvas = ({ selectedImage }) => {
     canvas.renderAll();
   };
 
+  // Log all canvas layers and their attributes for debugging
+  const logCanvasLayers = () => {
+    if (!canvas) return;
+
+    const layers = canvas.getObjects().map((obj) => {
+      const { type, left, top, width, height, fill, text } = obj;
+      return {
+        type, // E.g., 'circle', 'rect', 'text', 'image'
+        left,
+        top,
+        width: width || obj.radius * 2 || obj.scaleX * obj.width, // Handle width for circles or scaled objects
+        height: height || obj.radius * 2 || obj.scaleY * obj.height,
+        fill: fill || (obj.getSrc ? obj.getSrc() : undefined), // Get image src if it's an image
+        text: text || undefined, // If it's a text object
+      };
+    });
+
+    console.log(layers); // Log the array of layer details
+  };
+
   // Download the modified image as a PNG
   const downloadImage = () => {
     if (!canvas) return;
@@ -164,6 +184,7 @@ const ImageCanvas = ({ selectedImage }) => {
           <button className="Control_button" onClick={() => addShape("circle")}>Add Circle</button>
           <button className="Control_button" onClick={() => addShape("rectangle")}>Add Rectangle</button>
           <button className="Control_button" onClick={() => addShape("triangle")}>Add Triangle</button>
+          <button className="Control_button" onClick={logCanvasLayers}>Log Canvas Layers</button>
           <button className="Control_button" onClick={downloadImage}>Download Image</button>
         </div>
       )}
