@@ -6,7 +6,7 @@ const ImageCanvas = ({ selectedImage }) => {
   const [canvas, setCanvas] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Function to calculate responsive canvas dimensions
+  // Function to calculate responsive canvas dimensions conditions used
   const getCanvasDimensions = () => {
     const width = window.innerWidth < 800 ? window.innerWidth * 0.9 : 700;
     const height = window.innerHeight < 600 ? window.innerHeight * 0.5 : 500;
@@ -38,52 +38,45 @@ const ImageCanvas = ({ selectedImage }) => {
     };
   }, []);
 
-  // Add image to the canvas when selectedImage changes
   useEffect(() => {
     if (selectedImage && canvas) {
-      // Clear the canvas before adding a new image
       canvas.clear();
 
-      // Load and add the image to the canvas
       fabric.Image.fromURL(
         selectedImage.urls.regular,
         (img) => {
           const canvasWidth = canvas.getWidth();
           const canvasHeight = canvas.getHeight();
 
-          // Get the original dimensions of the image
           const imgWidth = img.width;
           const imgHeight = img.height;
 
-          // Calculate the scaling factor to fit the image inside the canvas
+          // Calculate image factors to fit in canvas (used stack overflow  help  :)
           const scaleX = canvasWidth / imgWidth;
           const scaleY = canvasHeight / imgHeight;
-          const scale = Math.min(scaleX, scaleY); // Maintain aspect ratio using the smaller scale factor
+          const scale = Math.min(scaleX, scaleY);
 
-          // Center the image on the canvas
           const offsetX = (canvasWidth - imgWidth * scale) / 2;
           const offsetY = (canvasHeight - imgHeight * scale) / 2;
 
-          // Set the image properties and scale it to fit the canvas
           img.set({
-            left: offsetX, // Center horizontally
-            top: offsetY, // Center vertically
+            left: offsetX, // Center he image horizontally
+            top: offsetY, // Center the image vertically
             scaleX: scale,
             scaleY: scale,
-            selectable: false, // Ensure the base image is not draggable
+            selectable: false, // set to false fr not image be draggable
           });
 
           canvas.add(img);
-          canvas.sendToBack(img); // Ensure image stays in the background
-          setImageLoaded(true); // Mark the image as loaded
+          canvas.sendToBack(img); 
+          setImageLoaded(true); 
           canvas.renderAll();
         },
-        { crossOrigin: "anonymous" } // Set crossOrigin for external images
+        { crossOrigin: "anonymous" }
       );
     }
   }, [selectedImage, canvas]);
 
-  // Add editable and resizable text
   const addText = () => {
     if (!canvas) return;
 
@@ -100,7 +93,6 @@ const ImageCanvas = ({ selectedImage }) => {
     canvas.renderAll();
   };
 
-  // Add resizable shapes (circle, rectangle, triangle)
   const addShape = (shape) => {
     if (!canvas) return;
 
@@ -137,27 +129,25 @@ const ImageCanvas = ({ selectedImage }) => {
     canvas.renderAll();
   };
 
-  // Log all canvas layers and their attributes for debugging
   const logCanvasLayers = () => {
     if (!canvas) return;
 
     const layers = canvas.getObjects().map((obj) => {
       const { type, left, top, width, height, fill, text } = obj;
       return {
-        type, // E.g., 'circle', 'rect', 'text', 'image'
+        type, 
         left,
         top,
-        width: width || obj.radius * 2 || obj.scaleX * obj.width, // Handle width for circles or scaled objects
+        width: width || obj.radius * 2 || obj.scaleX * obj.width, 
         height: height || obj.radius * 2 || obj.scaleY * obj.height,
-        fill: fill || (obj.getSrc ? obj.getSrc() : undefined), // Get image src if it's an image
-        text: text || undefined, // If it's a text object
+        fill: fill || (obj.getSrc ? obj.getSrc() : undefined), 
+        text: text || undefined, 
       };
     });
 
-    console.log(layers); // Log the array of layer details
+    console.log(layers); 
   };
 
-  // Download the modified image as a PNG
   const downloadImage = () => {
     if (!canvas) return;
 
@@ -174,10 +164,7 @@ const ImageCanvas = ({ selectedImage }) => {
 
   return (
     <div className="image_editor">
-      {/* Canvas where the image and elements will be displayed */}
       <canvas ref={canvasRef} className="canvas_body"></canvas>
-
-      {/* Controls for adding captions, shapes, and downloading the image */}
       {imageLoaded && (
         <div className="controls">
           <button className="Control_button" onClick={addText}>Add Text</button>

@@ -13,7 +13,7 @@ const ImageSearch = ({ onImageSelect }) => {
       );
       setImages(response.data.results);
     } catch (error) {
-      console.error("Error fetching images:", error);
+      console.error("Error in  fetching images=", error);
     }
   };
 
