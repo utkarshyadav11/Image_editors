@@ -35,3 +35,4 @@ ImageCanvas
 
 
  
+-------------------------- Find design pattern in public folder -----------------------
