@@ -1,0 +1,55 @@
+  .image_results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 36px;
+  }
+  
+  input{
+    border-radius: 0 !important;
+    border: 1px solid black;
+  }
+  .image_item {
+    flex: 0 0 300px;
+    height: 300px; 
+    /* overflow: hidden;  */
+    position: relative; 
+  }
+  
+  .image_item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+  }
+  
+  .Search_button{
+    padding: 8px 12px;
+    background: transparent;
+    cursor: pointer;
+    border: 1px solid black;
+  }
+
+  .Search_button:hover{
+    background-color: black;
+    color: white;
+  }
+
+  .Caption_button{
+    background: transparent;
+    cursor: pointer;
+    padding: 8px 16px;
+    margin-top: 8px;
+    border: 1px solid black;
+  }
+
+  .Caption_button:hover{
+    background-color: black;
+    color: white;
+  }
+
+  @media(min-width:200px)and (max-width:768px){
+    .Search_button{
+      margin-top: 8px;
+    }
+  }
+
+  

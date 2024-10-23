@@ -1,0 +1,63 @@
+.app-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.image_search input {
+  padding: 8px;
+  width: 300px;
+}
+
+.image_results {
+  display: flex;
+  flex-wrap: wrap;
+  /* gap: 70px; */
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.image_item {
+  display: inline-block;
+  text-align: center;
+}
+
+.canvas-container {
+  margin-top: 30px;
+  position: relative;
+}
+
+.image_editor {
+  margin-top: 4rem;
+  align-items: center;
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+}
+
+.controls {
+  display: flex;
+  gap: 2rem;
+}
+
+.Control_button {
+  padding: 8px 12px;
+  background: transparent;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.Control_button:hover {
+  background-color: black;
+  color: white;
+}
+
+@media (min-width: 200px) and (max-width: 768px) {
+  .image_results {
+    justify-content: center;
+    gap: 4rem;
+  }
+
+  .controls {
+    flex-wrap: wrap;
+  }
+}
