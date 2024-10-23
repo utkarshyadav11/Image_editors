@@ -184,7 +184,7 @@ const ImageCanvas = ({ selectedImage }) => {
           <button className="Control_button" onClick={() => addShape("circle")}>Add Circle</button>
           <button className="Control_button" onClick={() => addShape("rectangle")}>Add Rectangle</button>
           <button className="Control_button" onClick={() => addShape("triangle")}>Add Triangle</button>
-          <button className="Control_button" onClick={logCanvasLayers}>Log Canvas Layers</button>
+          <button className="Control_button" onClick={logCanvasLayers}>Log Canvas</button>
           <button className="Control_button" onClick={downloadImage}>Download Image</button>
         </div>
       )}
